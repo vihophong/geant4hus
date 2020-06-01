@@ -1,0 +1,105 @@
+Visualization I: Hands-on
+
+We will keep using the example from the previous, 'User Interface I' lecture 
+under 'G4WORKDIR/TaskC'.
+
+================================================================================
+
+________________________________________________________________________________
+A.:
+
+We will keep using the example B1 application in INTERACTIVE mode but we will 
+change the previously set C-shell("tcsh") character terminal interface to the Qt
+Graphical User Interface (GUI). Note, that we will use the application WITHOUT 
+any VISUALISATION at this point (see TaskC1 at the User Interface I Hands-On).
+
+Set the "Qt" Graphical User Interface as requested session, rebuild the 
+application and run in interactive mode. 
+ - see the differences compared to the C-shell like terminal
+ - initilaize and execute the application with default settings 
+
+Solution:
+  
+  1. change (line #55 in 'exampleB1.cc'): 
+    
+    ui = new G4UIExecutive(argc, argv, "tcsh"); 
+    to 
+    ui = new G4UIExecutive(argc, argv, "Qt");
+  
+  2. rebuild the application and run in interactive mode:
+  
+    > cd $G4WORKDIR/TaskC/B1/build 
+    > make 
+    > ./exampleB1
+    
+  3. run the simulation with default settings with 10 events (commands in the 
+     session window):
+  
+    > /run/initialize
+    > /run/beamOn 
+  
+  4. execute the 'run1.mac' file:
+  
+    > /control/execute run1.mac
+
+________________________________________________________________________________
+B.:
+Activate the visualization, without executing the "init_vis.mac" macro file, 
+build the application and execute in interactive mode (notice the 'vis' command 
+directory in the 'Help' menu !!!). 
+  
+  > ./exampleB1
+  
+Initialize the application and open the OpenGL visualization driver and draw 
+the geometry. Make the 'World' invisible, the 'Evelope' colour to blue with 
+some transparency. View the object with their surface (set the viewer style to
+surface view) and add coordinate axes (use the search box of the helper to 
+find out how to add axes). 
+
+Solution(commands in the session window):   
+  
+  > /run/initialize
+  > /vis/open OGL
+  > /vis/drawVolume
+###  > /vis/geometry/list
+  > /vis/geometry/set/visibility World 0  false
+  > /vis/geometry/set/colour Envelope 0  0 0 255 0.3
+  > /vis/viewer/set/style surface 
+  > /vis/scene/add/axes 
+  
+
+Add trajectories (smooth type) to your visualization and run the application 
+with 100 events. Then change the settings to see all trajectories of the run (
+up to # 1000) and re-run.
+
+Solution(commands in the session window):   
+
+  > /vis/scene/add/trajectories smooth
+  > /run/beamOn 100
+  > /vis/scene/endOfEventAction accumulate 1000
+  > /run/beamOn 100
+  
+________________________________________________________________________________
+C.:
+Exit the application and re-run in interactive mode. Initialize the application 
+then execute the "vis.mac" file.
+
+  
+  
+  
+  
+
+  
+  
+  
+   
+  
+
+   
+  
+      
+   
+
+
+    
+

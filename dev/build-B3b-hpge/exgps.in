@@ -1,0 +1,15 @@
+/run/initialize
+#
+/gps/verbose 0
+/gps/particle gamma
+#
+# the incident surface is in the y-z plane
+/gps/pos/type Point
+/gps/pos/centre 0. 0. 0. cm
+
+# set the focusing point, default is (0, 0, 0)
+/gps/ang/type iso
+#
+# the beam energy is in gaussian profile centered at 400 MeV
+/gps/ene/type Mono
+/gps/ene/mono 661.67 keV

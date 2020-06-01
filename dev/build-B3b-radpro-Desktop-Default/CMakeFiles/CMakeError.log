@@ -1,0 +1,111 @@
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_a8cc8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a8cc8.dir/build.make CMakeFiles/cmTC_a8cc8.dir/build
+make[1]: Entering directory '/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_a8cc8.dir/CheckSymbolExists.cxx.o
+/usr/bin/g++   -I/usr/include/qt4   -o CMakeFiles/cmTC_a8cc8.dir/CheckSymbolExists.cxx.o -c /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^~~~~~~~
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
+   return ((int*)(&Q_WS_WIN))[argc];
+                   ^~~~~~~~
+                   Q_WS_X11
+CMakeFiles/cmTC_a8cc8.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_a8cc8.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_a8cc8.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_a8cc8/fast' failed
+make: *** [cmTC_a8cc8/fast] Error 2
+
+File /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1c73e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1c73e.dir/build.make CMakeFiles/cmTC_1c73e.dir/build
+make[1]: Entering directory '/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1c73e.dir/CheckSymbolExists.cxx.o
+/usr/bin/g++   -I/usr/include/qt4   -o CMakeFiles/cmTC_1c73e.dir/CheckSymbolExists.cxx.o -c /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^~~~~~~~
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
+   return ((int*)(&Q_WS_QWS))[argc];
+                   ^~~~~~~~
+                   Q_WS_X11
+CMakeFiles/cmTC_1c73e.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_1c73e.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_1c73e.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_1c73e/fast' failed
+make: *** [cmTC_1c73e/fast] Error 2
+
+File /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_03adf/fast"
+/usr/bin/make -f CMakeFiles/cmTC_03adf.dir/build.make CMakeFiles/cmTC_03adf.dir/build
+make[1]: Entering directory '/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_03adf.dir/CheckSymbolExists.cxx.o
+/usr/bin/g++   -I/usr/include/qt4   -o CMakeFiles/cmTC_03adf.dir/CheckSymbolExists.cxx.o -c /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^~~~~~~~
+/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
+   return ((int*)(&Q_WS_MAC))[argc];
+                   ^~~~~~~~
+                   Q_WS_X11
+CMakeFiles/cmTC_03adf.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_03adf.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_03adf.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_03adf/fast' failed
+make: *** [cmTC_03adf/fast] Error 2
+
+File /home/lubuntu/phong/geant4hus/dev/build-B3b-radpro-Desktop-Default/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

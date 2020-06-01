@@ -1,0 +1,119 @@
+
+User Interface I: Hands-on
+
+We will use the simple example B1 available under the '/examples/basic/' 
+directory of the Geant4 code. The goal of the hands-on is to see some of 
+the commands, command submission modes that are discussed during the lecture 
+in a simple example.    
+
+
+================================================================================
+TaskC0: 
+Make a copy of the Geant4 /examples/basic/B1 example and build it:
+
+> cd $G4WORKDIR
+> mkdir TaskC
+> cd TaskC
+> cp -r $G4EXAMPLES/basic/B1 .
+
+Then we will build the application, by creating the build directory inside the 
+copied B1 example directory:
+
+> mkdir B1/build
+> cd B1/build
+> cmake ../ -DGeant4_DIR=$G4COMP
+> make
+
+After this we have the executable 'exampleB1' in our (current) 
+'$G4WORKDIR/TaskC/B1/build' directory.
+
+
+================================================================================
+TaskC1:
+Open the main method ('$G4WORKDIR/TaskC/B1/exampleB1.cc') of the B1 application 
+and investigate the 3 different ways of UI command submission: 
+ - interactive
+ - batch 
+ - hard-coded 
+ 
+ Then execute the application in interactive mode:
+ 
+ > $G4WORKDIR/TaskC/B1/build/exampleB1 
+
+ 
+Deactivate the (Qt) Graphical User Interface and set the C-shell (tcsh) like 
+character terminal by:
+
+ 1. change (line #55): 
+   ui = new G4UIExecutive(argc, argv); 
+   to 
+   ui = new G4UIExecutive(argc, argv, "tcsh");
+
+ 2. and comment the following lines (line # 84, 87, 102 and 112):
+   G4VisManager* visManager = new G4VisExecutive;
+   visManager->Initialize();
+   UImanager->ApplyCommand("/control/execute init_vis.mac");
+   delete visManager;
+   
+Then go to the 'build' directory, rebuild the application and execute again 
+in interactive mode:
+
+> cd $G4WORKDIR/TaskC/B1/build/ 
+> make
+> ./exampleB1
+
+You should see a simple, C-shell like character terminal and you B1 application 
+in its Geant4 'PreInit' state waiting for your commands.
+
+
+================================================================================
+TaskC2:
+Continue TaskC1 by executing the simulation application using the default 
+settings. 
+
+First one needs to initialize the application by:
+
+PreInit>/run/initialize
+
+that brings the application into the Geant4 'Idle' state waiting for further 
+commands. If default values will be used for all parameters, one can execute 
+the simulation application by:
+
+Idle>/run/beamOn 10  
+
+Investigate the output of the simulation (primary particle type, energy, etc.)
+
+
+================================================================================
+TaskC3:
+Continue TaskC2 by executing the simulation now using some of the available 
+commands of the Geant4 Particle Gun (that is used go generate primary particles)
+in this application: set electrons(e-) as primary particles with 1.0 MeV kinetic
+energy:
+
+Idle>/gun/particle e-
+Idle>/gun/energy 1.0 MeV
+Idle>/run/beamOn 10  
+
+Change the tarcking verbose value to 1 and see what happens:
+
+Idle>/tracking/verbose 1
+Idle>/run/beamOn 10  
+
+
+================================================================================
+TaskC4:
+Exit the application and execute now the application in batch mode using the 
+'run1.mac' macro file.
+
+Way 1.:
+
+Idle>/exit
+> ./exampleB1 run1.mac
+
+Way 2.:
+> ./exampleB1
+PreInit>/control/execute run1.mac
+
+Edit the 'run1.mac' to set primary particle type to electron (e-) and kinetic 
+energy to 1.0 MeV. Run the application.

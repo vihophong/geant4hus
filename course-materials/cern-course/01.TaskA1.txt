@@ -1,0 +1,39 @@
+
+cd
+
+# Examine the environment
+
+echo $G4COMP
+ls $G4COMP/
+
+echo $G4INSTALL
+
+env  | grep G4
+
+# work with a copy of example B1 
+
+mkdir g4work
+cd g4work
+
+echo $G4COMP
+ls $G4COMP/
+
+mkdir taskA
+cd taskA
+
+cp -r $G4INSTALL/share/Geant4-10.4.2/examples/basic/B1  ./
+
+cp -r $G4EXAMPLES/basic/B1   ./
+
+ls 
+less README
+less exampleB1.cc
+
+mkdir build
+cd build
+cmake -DGeant4_DIR=$G4COMP/  ../
+make
+
+./exampleB1
+
+

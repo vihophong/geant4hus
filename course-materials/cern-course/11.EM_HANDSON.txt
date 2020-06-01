@@ -1,0 +1,201 @@
+Electromagnetic Physics: Hands-on
+
+We will use the "B4a" Simplified Sampling Calorimeter example from the Geant4 
+examples under '/examples/basic/B4/B4a.
+You can find the application description at $G4EXAMPLES/basic/B4/README
+
+
+================================================================================
+TaskN0: 
+Make a copy of the Geant4 /examples/basic/B4/B4a example into a new TaskN 
+directory. Build and execute the B4a application: interactive mode with run2.mac
+
+  SOLUTIONS:
+  
+    > cd $G4WORKDIR
+    > mkdir TaskN
+    > cd TaskN
+    > cp -r $G4EXAMPLES/basic/B4/B4a .
+
+    Then we will build the application, by creating the build directory inside 
+    the copied B4a example directory:
+
+    > mkdir B4a/build
+    > cd B4a/build
+    > cmake ../ -DGeant4_DIR=$G4COMP
+    > make
+
+    After this we have the executable 'exampleB4a' in our (current) 
+    '$G4WORKDIR/TaskN/B4a/build' directory. So we can execute it as (interactive)
+
+    > ./exampleB4a
+
+    then we can use the 
+
+    > /control/execute run2.mac 
+
+    Geant4 UI command in the GUI session window to execute the run2.mac file.
+
+
+
+
+================================================================================
+TaskN1: 
+Open the main application "/B4a/exampleB4a.cc" and find the location of the 
+definition of the physics list. Change the definition from the simple one to 
+use the G4PhysListFactory object: this object knows all the reference physics lists 
+and can change their EM constructor to any of the available. Change the "FTFP_BERT"
+physics list (by default using EM-opt0 CTR) to use the more accurate EM-opt4(EMZ)
+CTR i.e. "FTFP_BERT_EMZ". Run the application with both the "FTFP_BERT" and the 
+"FTFP_BERT_EMZ" physics lists and see the difference (print out at initialization) 
+in the description of the electron and gamma interactions: 
+
+  SOLUTIONS:
+   
+   We will need to edit the main "exampleB4a.cc" application file and change the 
+   "auto physicsList = new FTFP_BERT;" line to
+   
+   G4PhysListFactory thePhysListFactory;
+   G4VModularPhysicsList* physicsList = 
+     thePhysListFactory.GetReferencePhysList("FTFP_BERT_EMZ");
+
+   You will also need to include the "G4PhysListFactory.hh" header file.
+   
+   Build and run the application by using "FTFP_BERT" and "FTFP_BERT_EMZ" and 
+   see the differences in the physics list printouts (electron, gamma) and crosscheck 
+   with the lecture material (G4EmStandardPhysics vs G4EmStandardPhysics_option4).  
+
+
+
+
+================================================================================
+TaskN2: 
+We will create our own, simple runX.mac Geant4 macro file. It will contains UI
+commands to initialize the application, set the primary particle type to be 
+electron (e-) and primary particle energy 1 GeV. The macro will execute 1 event:  
+
+  SOLUTIONS:
+  
+   First we create our "runX.mac" macro file with the commands:
+  
+   > cat > runX.mac
+   #
+   # Initialize the application
+   /run/initialize
+   #
+   # set primary particles to : e- E=1 [GeV] 
+   /gun/particle e-
+   /gun/energy 1 GeV
+   #
+   # Run 1 Events
+   /run/beamOn 1
+   
+   Then we can run the application first in batch mode as:
+   
+   > exampleB4a -m runX.mac
+   
+   See the output of the simulation (MEAN ENERGY DEPOSIT IN THE ABSORBER AND GAP 
+   MATERIALS) and FIND SOME PROBLEMS!!! Verify the problem with visualisation!
+   
+   The problem is that the reported mean energy deposit in the absorber material 
+   EAbs : mean = 0 eV  rms = 0 eV   
+   Running the application now with visualisation as 
+   > exampleB4a 
+   then in the GUI session window
+   /control/execute run2.mac 
+   shows that there are particles crossing the whole calorimeter i.e. both the 
+   GAP and ABSORBER materials so indeed something is wrong.
+   
+   To fix the problem edit the "../src/B4RunAction.cc" file:
+   1. set the upper limit of the energy deposit histograms from 
+     800*MeV and 100*MeV to 10*GeV and 10*GeV
+   2. the number of bins from 100 to 10000 in both cases  
+   
+   Re-build and run the application to check that the problem has been fixed.
+   
+   > make 
+   > ./exampleB4a -m runX.mac 
+
+
+
+================================================================================
+TaskN4: 
+Use the new runX.mac macro file and run the simulation in interactive mode with 
+visualization. Inactivate the bremsstrahlung process for electrons and see the 
+difference in the simulated EM shower:
+
+
+  SOLUTIONS:
+  
+  Run the application in interactive mode as 
+  
+  > exampleB4a
+  
+  then in the GUI session window execute the macro as it is first
+  
+  > /control/execute runX.mac
+  
+  Then inactivate bremsstrahlung for electrons and re-run the runX.mac
+   
+  > /process/inactivate eBrem e-
+  > /control/execute runX.mac
+  
+  Explain the difference in the simulated EM shower! (You can lower now the 
+  secondary production threshold and try to see some differences ?)
+  
+  
+
+================================================================================
+TaskN4: 
+Investigate the effects on the tracking of setting different secondary production 
+threshold (see number of secondaries and production cut in length/energy): 
+a. Use first the GUI and the visualization to draw the simulated shower using 
+   different (1.0 km, 1 m, 15 cm, 10 cm) secondary production threshold.
+b. Do the same but this time use the application in batch mode with the runX.mac 
+   macro. Change the macro to: include setting of production threshold, setting 
+   number of threads to 1, setting the tracking verbose to 1 and number of event 
+   to simulate to 1.
+        
+   
+     SOLUTIONS:
+     
+      a. 
+      > exampleB4a
+      > /run/setCut 1.0 km
+      > /control/execute runX.mac
+
+      > /run/setCut 1.0 m
+      > /control/execute runX.mac
+      ...
+      
+      b. 
+      The new version of runX.mac macro file looks like:
+      
+      #
+      # Setting racking verbose level to 1
+      /tracking/verbose 1
+      #
+      # Setting number of worker threads to 1 
+      /run/numberOfThreads 1
+      #
+      # Initialize the application
+      /run/initialize
+      #
+      # Set secondary production threshol to 1.0 km
+      /run/setCut 1.0 km
+      #
+      # Settings of the primary gun
+      /gun/particle e-
+      /gun/energy 1 GeV
+      #
+      # Run 1 event
+      /run/beamOn 1 
+      #
+      
+      And can be executed as 
+      
+      > exampleB4a -m runX.mac
+      
+      See and explain the printout!
+      
+ 

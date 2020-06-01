@@ -1,0 +1,65 @@
+TaskM-1
+
+Start VM and open a terminal window
+Copy, compile, and build the example into working area
+ cd $G4WORKDIR
+ mkdir TaskM
+ cd TaskM
+ cp $G4INSTALL/share/Geant4-10.5.0/examples/extended/electromagnetic/TestEm7 ./
+ cd TestEm7
+ mkdir build
+ cd build
+ cmake -DGeant4_DIR=${G4COMP} ../
+ make
+Open interactive session
+./TestEm7
+ /control/execute/vis.mac
+ /run/beamOn 1
+Check the physics processes attached and their ordering:
+/particle/select e-
+/particle/processes/dump
+Check what particles exist:
+/particle/list
+Check a particle property:
+/particle/select e-
+/particle/property/dump
+Please type “help” to get the full set of commands for particle category
+
+TaskM-2
+
+Start VM and open a terminal window
+Continue with TestEm7
+cd $G4WORKDIR/TaskM/TestEm7/build
+./TestEm7
+/control/execute vis.mac
+/run/beamOn 1
+What processes are used for
+ gamma, e-, e+, proton
+What are the cut in range?
+Set primary particle proton and run with different range cuts
+/gun/particle proton
+/run/setCut 1 km
+/run/beamOn 10
+/run/setCut 1 mm
+/run/beamOn 10
+/run/setCut 0.001 mm
+/run/beamOn 10
+
+Copy, compile, and build the example into working area
+ cd $G4WORKDIR
+ mkdir TaskM
+ cd TaskM
+ cp $G4INSTALL/share/Geant4-10.5.0/examples/extended/hadronic/Hadr01 ./
+ cd Hadr01
+ mkdir build
+ cd build
+ cmake -DGeant4_DIR=${G4COMP} ../
+ make
+Run in the batch mode
+ ./Hadr01 Hadr01.in FTFP_BERT >& ftfp_bert.log
+ ./Hadr01 Hadr01.in FTFP_BERT_HP >& ftfp_bert_hp.log
+ compare log files
+Study Hadr01.cc – how G4PhysListFactory is used
+
+
+
